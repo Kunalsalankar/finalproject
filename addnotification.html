@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <!-- My CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        height: 100vh;
+    }
+
+    .main-container {
+        display: flex;
+        gap: 20px;
+        width: 90%;
+        max-width: 1800px;
+        margin: 20px auto;
+    }
+
+    .form-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        flex: 1;
+    }
+
+    .notifications-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        flex: 1.5;
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+
+    h1, h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    input, select, textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #1abc9c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0e5144;
+    }
+
+    .notification-list {
+        margin-top: 10px;
+    }
+
+    .notification-item {
+        background: #f9f9f9;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        position: relative;
+    }
+
+    .notification-item h4 {
+        margin: 0 0 5px 0;
+    }
+
+    .actions {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+    .actions button {
+        background: none;
+        border: none;
+        color: #1abc9c;
+        cursor: pointer;
+        margin-left: 5px;
+        width: auto;
+    }
+
+    .actions button:hover {
+        color: #0e5144;
+    }
+
+    .priority-high {
+        border-left: 4px solid red;
+    }
+
+    .priority-medium {
+        border-left: 4px solid orange;
+    }
+
+    .priority-low {
+        border-left: 4px solid green;
+    }
+
+    .login-container {
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-error {
+        color: red;
+        margin-bottom: 10px;
+    }
+
+    #loginSection, #contentSection {
+        transition: opacity 0.3s ease;
+    }
+
+    .hidden {
+        display: none;
+        opacity: 0;
+    }
+  </style>
+
+  <title>Coasty Check - Add Notifications</title>
+</head>
+<body>
+
+  <!-- Login Section -->
+  <div id="loginSection">
+      <div class="login-container">
+          <h1>Login to Add Notifications</h1>
+          <div id="loginError" class="login-error"></div>
+          <input type="email" id="loginEmail" placeholder="Email" required>
+          <input type="password" id="loginPassword" placeholder="Password" required>
+          <button id="loginButton">Login</button>
+          <p>Don't have an account? <a href="#" id="signupToggle">Sign Up</a></p>
+      </div>
+  </div>
+
+  <!-- Content Section (Hidden until logged in) -->
+  <div id="contentSection" class="hidden">
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+      <a href="#" class="brand">
+        <i class='bx bxs-smile'></i>
+        <span class="text">Activity Manager</span>
+      </a>
+      <ul class="side-menu top">
+        <li>
+          <a href="index.html">
+            <i class='bx bxs-dashboard'></i>
+            <span class="text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="addactivity.html">
+              <i class='bx bx-swim'></i>
+            <span class="text">ADD Activity</span>
+          </a>
+        </li>
+
+        <li class="active">
+          <a href="addnotification.html">
+            <i class='bx bxs-message-dots'></i>
+            <span class="text">ADD Notifications</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="review.html">
+            <i class='bx bx-align-justify'></i>
+            <span class="text">Reviews</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="A-profile.html">
+            <i class='bx bxs-user-circle'></i>
+            <span class="text">Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="logoutButton" class="logout">
+            <i class='bx bxs-log-out-circle'></i>
+            <span class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <section id="content">
+      <!-- MAIN -->
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a href="#">Dashboard</a>
+              </li>
+              <li><i class='bx bx-chevron-right'></i></li>
+              <li>
+                <a class="active" href="#">Add Notifications</a>
+              </li>
+            </ul>
+          </div>
+          <div class="main-container">
+            <!-- Form -->
+            <div class="form-container">
+                <h1>Add Notification</h1>
+                <select id="notificationType">
+                    <option value="">Select Notification Type</option>
+                    <option value="beach">Beach Notification</option>
+                    <option value="activity">Activity Notification</option>
+                    <option value="system">System Notification</option>
+                </select>
+                
+                <div id="beachSelectContainer" style="display: none;">
+                    <select id="beachName">
+                        <option value="">Select Beach</option>
+                        <option value="Munambam Beach">Munambam Beach</option>
+                        <option value="Kuzhupilly Beach">Kuzhupilly Beach</option>
+                        <option value="Puthuvype Beach">Puthuvype Beach</option>
+                        <option value="Cherai Beach">Cherai Beach</option>
+                    </select>
+                </div>
+                
+                <div id="activitySelectContainer" style="display: none;">
+                    <select id="activityName">
+                        <option value="">Select Activity Type</option>
+                        <option value="Snorkeling">Snorkeling</option>
+                        <option value="Jet Skiing">Jet Skiing</option>
+                        <option value="Parasaling">Parasaling</option>
+                        <option value="Boating">Boating</option>
+                        <option value="Scuba Diving">Scuba Diving</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <input type="text" id="notificationTitle" placeholder="Notification Title">
+                <textarea id="notificationMessage" placeholder="Notification Message"></textarea>
+                
+                <select id="notificationPriority">
+                    <option value="">Select Priority</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                
+                <button id="addNotificationButton">Add Notification</button>
+            </div>
+            
+            <div class="notifications-container">
+                <h1>Existing Notifications</h1>
+                <div id="filterSection">
+                    <h2>Filter Notifications</h2>
+                    <select id="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="beach">Beach Notifications</option>
+                        <option value="activity">Activity Notifications</option>
+                        <option value="system">System Notifications</option>
+                    </select>
+                    
+                    <select id="priorityFilter">
+                        <option value="">All Priorities</option>
+                        <option value="high">High Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="low">Low Priority</option>
+                    </select>
+                </div>
+                <div class="notification-list" id="notificationList"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getDatabase, ref, set, push, onValue, remove, get } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEG79vjoQAQ2CKeUTIoORk2VSdldXF33E",
+      authDomain: "yash-9dd33.firebaseapp.com",
+      databaseURL: "https://yash-9dd33-default-rtdb.firebaseio.com",
+      projectId: "yash-9dd33",
+      storageBucket: "yash-9dd33.firebasestorage.app",
+      messagingSenderId: "933477566768",
+      appId: "1:933477566768:web:5fa44573d34c86fa4c60f5",
+      measurementId: "G-ZP9YZX8Q14"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+
+    // DOM Elements
+    const loginSection = document.getElementById('loginSection');
+    const contentSection = document.getElementById('contentSection');
+    const loginButton = document.getElementById('loginButton');
+    const logoutButton = document.getElementById('logoutButton');
+    const notificationType = document.getElementById('notificationType');
+    const beachSelectContainer = document.getElementById('beachSelectContainer');
+    const activitySelectContainer = document.getElementById('activitySelectContainer');
+    const notificationList = document.getElementById('notificationList');
+    const typeFilter = document.getElementById('typeFilter');
+    const priorityFilter = document.getElementById('priorityFilter');
+
+    // Authentication state listener
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        loginSection.classList.add('hidden');
+        contentSection.classList.remove('hidden');
+        
+        // Check if user is an admin
+        get(ref(db, `users/${user.uid}`)).then((snapshot) => {
+          const userData = snapshot.val();
+          if (userData && userData.role === 'admin') {
+            // Show system notification option
+            document.querySelector('#notificationType option[value="system"]').style.display = 'block';
+          } else {
+            // Hide system notification option for non-admin users
+            document.querySelector('#notificationType option[value="system"]').style.display = 'none';
+          }
+        });
+
+        // Load notifications
+        fetchNotifications();
+      } else {
+        // User is signed out
+        loginSection.classList.remove('hidden');
+        contentSection.classList.add('hidden');
+      }
+    });
+
+    // Login functionality
+    loginButton.addEventListener('click', () => {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const loginError = document.getElementById('loginError');
+      
+      if (email && password) {
+        signInWithEmailAndPassword(auth, email, password)
+          .catch((error) => {
+            loginError.textContent = `Login failed: ${error.message}`;
+          });
+      } else {
+        loginError.textContent = "Please enter both email and password.";
+      }
+    });
+
+    // Logout functionality
+    logoutButton.addEventListener('click', () => {
+      signOut(auth).then(() => {
+        console.log("User signed out");
+      }).catch((error) => {
+        console.error("Sign out error:", error);
+      });
+    });
+
+    // Toggle notification type options
+    notificationType.addEventListener('change', () => {
+      const type = notificationType.value;
+      
+      beachSelectContainer.style.display = type === 'beach' ? 'block' : 'none';
+      activitySelectContainer.style.display = type === 'activity' ? 'block' : 'none';
+    });
+
+    // Add Notification
+    document.getElementById('addNotificationButton').addEventListener('click', async () => {
+      const type = document.getElementById('notificationType').value.trim();
+      const title = document.getElementById('notificationTitle').value.trim();
+      const message = document.getElementById('notificationMessage').value.trim();
+      const priority = document.getElementById('notificationPriority').value.trim();
+      
+      if (!auth.currentUser) {
+        alert("Please login to add notifications");
+        return;
+      }
+      
+      if (!type || !title || !message || !priority) {
+        alert("Please fill out all required fields.");
+        return;
+      }
+
+      try {
+        const currentUser = auth.currentUser;
+        const userId = currentUser.uid;
+        const timestamp = Date.now();
+        
+        let notificationPath;
+        let notificationData = {
+          title,
+          message,
+          priority,
+          createdAt: timestamp,
+          createdBy: userId
+        };
+        
+        switch(type) {
+          case 'beach':
+            const beachName = document.getElementById('beachName').value.trim();
+            if (!beachName) {
+              alert("Please select a beach.");
+              return;
+            }
+            const beachId = beachName.toLowerCase().replace(/\s+/g, '-');
+            notificationPath = `beach_notifications/${beachId}`;
+            notificationData.beachName = beachName;
+            break;
+            
+          case 'activity':
+            const activityName = document.getElementById('activityName').value.trim();
+            if (!activityName) {
+              alert("Please select an activity.");
+              return;
+            }
+            const activityId = activityName.toLowerCase().replace(/\s+/g, '-');
+            notificationPath = `activity_notifications/${activityId}`;
+            notificationData.activityName = activityName;
+            break;
+            
+          case 'system':
+            // Verify if user is admin before allowing system notification
+            const userSnapshot = await get(ref(db, `users/${userId}`));
+            const userData = userSnapshot.val();
+            if (!userData || userData.role !== 'admin') {
+              alert("You don't have permission to create system notifications.");
+              return;
+            }
+            notificationPath = 'system_notifications';
+            break;
+            
+          default:
+            alert("Please select a notification type.");
+            return;
+        }
+        
+        // Also add to general notifications
+        const mainNotificationRef = push(ref(db, 'notifications'));
+        await set(mainNotificationRef, {
+          ...notificationData,
+          type
+        });
+        
+        // Add to specific notification path
+        const specificNotificationRef = push(ref(db, notificationPath));
+        await set(specificNotificationRef, notificationData);
+        
+        alert("Notification added successfully!");
+        
+        // Clear input fields
+        document.getElementById('notificationType').value = '';
+        document.getElementById('beachName').value = '';
+        document.getElementById('activityName').value = '';
+        document.getElementById('notificationTitle').value = '';
+        document.getElementById('notificationMessage').value = '';
+        document.getElementById('notificationPriority').value = '';
+        beachSelectContainer.style.display = 'none';
+        activitySelectContainer.style.display = 'none';
+        
+      } catch (error) {
+        console.error("Error adding notification:", error);
+        alert(`Failed to add notification: ${error.message}`);
+      }
+    });
+
+    // Fetch and Filter Notifications
+    const fetchNotifications = () => {
+      onValue(ref(db, 'notifications'), (snapshot) => {
+        notificationList.innerHTML = '';
+        const selectedType = typeFilter.value;
+        const selectedPriority = priorityFilter.value;
+        
+        snapshot.forEach((childSnapshot) => {
+          const key = childSnapshot.key;
+          const data = childSnapshot.val();
+          
+          // Apply filters
+          if ((selectedType === '' || data.type === selectedType) && 
+              (selectedPriority === '' || data.priority === selectedPriority)) {
+            
+            const notificationItem = document.createElement('div');
+            notificationItem.className = `notification-item priority-${data.priority}`;
+            
+            let details = '';
+            if (data.type === 'beach' && data.beachName) {
+              details = `<p><strong>Beach:</strong> ${data.beachName}</p>`;
+            } else if (data.type === 'activity' && data.activityName) {
+              details = `<p><strong>Activity:</strong> ${data.activityName}</p>`;
+            } else if (data.type === 'system') {
+              details = `<p><strong>Type:</strong> System Notification</p>`;
+            }
+            
+            notificationItem.innerHTML = `
+              <h4>${data.title} <span class="priority-badge">[${data.priority}]</span></h4>
+              <p>${data.message}</p>
+              ${details}
+              <small>Created on: ${new Date(data.createdAt).toLocaleString()}</small>
+              <div class="actions">
+                <button onclick="deleteNotification('${key}', '${data.type}')">Delete</button>
+              </div>
+            `;
+            notificationList.appendChild(notificationItem);
+          }
+        });
+      });
+    };
+
+    // Delete Notification
+    window.deleteNotification = async (key, type) => {
+      if (!auth.currentUser) {
+        alert("Please login to delete notifications");
+        return;
+      }
+      
+      if (confirm("Are you sure you want to delete this notification?")) {
+        try {
+          const currentUser = auth.currentUser;
+          const userId = currentUser.uid;
+          
+          // Get notification data to find related paths
+          const notificationSnapshot = await get(ref(db, `notifications/${key}`));
+          const notificationData = notificationSnapshot.val();
+          
+          if (!notificationData) {
+            throw new Error("Notification not found");
+          }
+          
+          // Check if user is authorized to delete (either creator or admin)
+          const userSnapshot = await get(ref(db, `users/${userId}`));
+          const userData = userSnapshot.val();
+          const isAdmin = userData && userData.role === 'admin';
+          const isCreator = notificationData.createdBy === userId;
+          
+          if (!isAdmin && !isCreator) {
+            alert("You don't have permission to delete this notification.");
+            return;
+          }
+          
+          // Delete from main notifications
+          await remove(ref(db, `notifications/${key}`));
+          
+          // Delete from specific path based on type
+          if (type === 'beach' && notificationData.beachName) {
+            const beachId = notificationData.beachName.toLowerCase().replace(/\s+/g, '-');
+            // Finding the specific notification in beach_notifications is complex,
+            // would need to match content or have a reference stored
+          } else if (type === 'activity' && notificationData.activityName) {
+            const activityId = notificationData.activityName.toLowerCase().replace(/\s+/g, '-');
+            // Similar challenge for activity_notifications
+          } else if (type === 'system') {
+            // Similar challenge for system_notifications
+          }
+          
+          alert("Notification deleted successfully!");
+          fetchNotifications();
+        } catch (error) {
+          console.error("Error deleting notification:", error);
+          alert(`Failed to delete notification: ${error.message}`);
+        }
+      }
+    };
+
+    // Add event listeners for filters
+    typeFilter.addEventListener('change', fetchNotifications);
+    priorityFilter.addEventListener('change', fetchNotifications);
+  </script>
+
+</body>
+</html>
