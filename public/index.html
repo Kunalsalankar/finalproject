@@ -1,89 +1,342 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/11.6.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/11.6.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/11.6.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/11.6.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/11.6.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/11.6.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/11.6.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/11.6.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/11.6.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/11.6.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <!-- Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <!-- My CSS -->
+  <link rel="stylesheet" href="style.css">
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        height: 100vh;
+    }
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    .main-container {
+        display: flex;
+        gap: 20px;
+        width: 90%;
+        max-width: 1200px;
+        margin: 20px auto;
+    }
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+    .form-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        flex: 1;
+    }
+
+    .activities-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        flex: 1.5;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    input, select, textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #1abc9c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0e5144;
+    }
+
+    .activity-list {
+        margin-top: 10px;
+    }
+
+    .activity-item {
+        background: #f9f9f9;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        position: relative;
+    }
+
+    .activity-item h4 {
+        margin: 0 0 5px 0;
+    }
+
+    .actions {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+    .actions button {
+        background: none;
+        border: none;
+        color: #1abc9c;
+        cursor: pointer;
+        margin-left: 5px;
+        width: auto;
+    }
+
+    .actions button:hover {
+        color: #0e5144;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0077b6;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 15px;
+    }
+
+    .card h2 {
+      color: #005f73;
+      margin: 0;
+    }
+
+    .card p {
+      margin: 5px 0;
+    }
+
+    .card .price {
+      font-weight: bold;
+      color: #007f5f;
+    }
+
+    .card .time {
+      color: #6a0572;
+    }
+</style>
+
+  <title>Coasty Check</title>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="#" class="brand">
+      <i class='bx bxs-smile'></i>
+      <span class="text">Activity Manager</span>
+    </a>
+    <ul class="side-menu top">
+      <li class="active">
+        <a href="index.html">
+          <i class='bx bxs-dashboard'></i>
+          <span class="text">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="addactivity.html">
+            <i class='bx bx-swim'></i>
+          <span class="text">ADD Activity</span>
+        </a>
+      </li>
+
+
+      <li>
+        <a href="addnotification.html">
+          <i class='bx bxs-message-dots'></i>
+          <span class="text">ADD Notifications</span>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="review.html">
+          <i class='bx bx-align-justify'></i>
+          <span class="text">Reviews</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="profile.html">
+          <i class='bx bxs-user-circle'></i>
+          <span class="text">Profile</span>
+        </a>
+      </li>
+      <li>
+        <a href="login.html" class="logout">
+          <i class='bx bxs-log-out-circle'></i>
+          <span class="text">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+  <!-- SIDEBAR -->
+
+
+  <!-- CONTENT -->
+  <section id="content">
+
+    <!-- MAIN -->
+    <main>
+      <div class="head-title">
+        <div class="left">
+          <h1>Dashboard</h1>
+          <ul class="breadcrumb">
+            <li>
+              <a href="#">Dashboard</a>
+            </li>
+            <li><i class='bx bx-chevron-right'></i></li>
+            <li>
+              <a class="active" href="#">Home</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <img src="managerbg.jpg" alt="Beaches Banner" style="width:100%; height: 300px; border-radius: 10px; margin-bottom: 20px;">
+      <ul class="box-info">
+        <li>
+            <i class='bx bx-swim'></i>
+          <span class="text">
+            <h3 id="activityCount">0</h3>
+            <p>Number of Activity</p>
+          </span>
+        </li>
+        
+        
+        </li>
+      </ul>
+      <div class="container">
+        <h1>Beach Activities</h1>
+        <div id="beach-list"></div>
+      </div>
+
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+    
+        // Firebase configuration
+        const firebaseConfig = {
+  apiKey: "AIzaSyCEG79vjoQAQ2CKeUTIoORk2VSdldXF33E",
+  authDomain: "yash-9dd33.firebaseapp.com",
+  databaseURL: "https://yash-9dd33-default-rtdb.firebaseio.com",
+  projectId: "yash-9dd33",
+  storageBucket: "yash-9dd33.firebasestorage.app",
+  messagingSenderId: "933477566768",
+  appId: "1:933477566768:web:5fa44573d34c86fa4c60f5",
+  measurementId: "G-ZP9YZX8Q14"
+};
+
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+    
+        // the number of activity
+        const fetchActivityCount = () => {
+          const activityRef = ref(db, 'beach-activities');
+          onValue(activityRef, (snapshot) => {
+            const activityCount = snapshot.size || Object.keys(snapshot.val() || {}).length;
+            document.getElementById('activityCount').innerText = activityCount;
+          });
+        };
+
+       // the number of booking
+    
+    
+        
+        //for beaches
+        window.addEventListener('load', fetchActivityCount);
+        // for activity incharge
+
+      </script>
+  </main>
+  
+</section>
+<script>
+  // Sample Data
+  const activities = [
+    {
+      name: "Jet Skiing",
+      beach: "Munambam Beach",
+      location: "Kochi, India",
+      price: "₹600 - ₹900/hour",
+      timeSlot: "9:00 AM - 6:00 PM",
+      description: "Jet Skiing at Munambam Beach is an exhilarating and adrenaline-pumping water sport activity. Riders can enjoy speeds of up to 60 km/h and pass through the splendid and elegant coastline in Kochi, Ernakulam. The activity is offered at Munambam Beach",
+      image: "jet.jpg"
+    },
+    
+
+
+  ];
+
+  // Render Activities
+  const renderActivities = () => {
+    const beachList = document.getElementById('beach-list');
+    beachList.innerHTML = '';
+
+    activities.forEach(activity => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      card.innerHTML = `
+        <img src="${activity.image}" alt="${activity.name}">
+        <div>
+          <h2>${activity.name}</h2>
+          <p><strong>Beach:</strong> ${activity.beach}</p>
+          <p><strong>Location:</strong> ${activity.location}</p>
+          <p class="price"><strong>Price:</strong> ${activity.price}</p>
+          <p class="time"><strong>Time Slot:</strong> ${activity.timeSlot}</p>
+          <p><strong>Description:</strong> ${activity.description}</p>
+        </div>
+      `;
+
+      beachList.appendChild(card);
+    });
+  };
+
+  // Call Render Function
+  renderActivities();
+</script>
+
+
+</body>
 </html>
